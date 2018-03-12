@@ -1,4 +1,10 @@
 language: clojure
-script: lein uberjar
+services:
+  - docker
+before_install:
+  - docker run -dt --name mint -e POSTGRES_DB=mint -p 5432:5432 postgres:9.6
+script:
+  - lein test
+  - lein uberjar
 jdk:
   - oraclejdk8
